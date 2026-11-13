@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Third-party build of Essentia.js, kept unmodified:
+    "public/vendor/**",
+    "storybook-static/**",
   ]),
 ]);
 

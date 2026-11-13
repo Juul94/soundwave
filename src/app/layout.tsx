@@ -4,7 +4,7 @@ import "./globals.css";
 import { RegisterSW } from "@/components/RegisterSW";
 import { InstallGate } from "@/components/InstallGate";
 import { I18nProvider } from "@/components/I18n";
-import { getLang, getT } from "@/lib/i18n-server";
+import { getLang, getT } from "@/i18n/server";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 

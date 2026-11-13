@@ -3,8 +3,8 @@ import { UserManager } from "./UserManager";
 import { PageTitle } from "@/components/ui";
 import { requireAdmin } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
-import type { Profile } from "@/lib/types";
-import { getT } from "@/lib/i18n-server";
+import type { Profile } from "@/types";
+import { getT } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).admin.usersTitle };

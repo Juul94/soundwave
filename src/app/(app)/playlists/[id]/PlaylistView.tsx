@@ -7,8 +7,8 @@ import { ChevronLeft, Pencil, Play, Shuffle, Trash2 } from "lucide-react";
 import { usePlayer } from "@/components/player/PlayerProvider";
 import { PlaylistScope } from "@/components/PlaylistScope";
 import { SongList } from "@/components/SongList";
-import { cleanName, deletePlaylist, removeFromPlaylist, renamePlaylist } from "@/lib/playlists";
-import type { SongView } from "@/lib/types";
+import { cleanName, deletePlaylist, removeFromPlaylist, renamePlaylist } from "@/services/playlists";
+import type { SongView } from "@/types";
 import { useT } from "@/components/I18n";
 
 export function PlaylistView({ id, name, songs }: { id: string; name: string; songs: SongView[] }) {

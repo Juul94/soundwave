@@ -3,7 +3,7 @@
 import { Fragment, useRef, useState } from "react";
 import { GripVertical } from "lucide-react";
 import { Cover } from "@/components/Cover";
-import type { SongView } from "@/lib/types";
+import type { SongView } from "@/types";
 import { usePlayer } from "./PlayerProvider";
 import { useT } from "@/components/I18n";
 

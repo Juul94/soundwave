@@ -1,6 +1,6 @@
 // Free, in-browser genre guess: two small MusiCNN models (Essentia, MTG-UPF) listen to 15 s of the song.
 // Load with a dynamic import; nothing is sent to a server.
-import type { Genre } from "@/lib/types";
+import type { Genre } from "@/types";
 
 const MODELS = [
   { url: "/models/genre/dortmund/model.json", labels: ["Alternative", "Blues", "Electronic", "Country", "R&B", "Jazz", "Pop", "Hip-Hop", "Rock"] },

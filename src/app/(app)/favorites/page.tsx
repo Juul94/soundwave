@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { PageTitle } from "@/components/ui";
 import { FavoritesList } from "./FavoritesList";
 import { requireUser } from "@/lib/auth";
-import { songsFromJoin } from "@/lib/library";
-import { getT } from "@/lib/i18n-server";
+import { songsFromJoin } from "@/services/library";
+import { getT } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).favorites.title };

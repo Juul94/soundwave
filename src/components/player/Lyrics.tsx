@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
-import { parseLyrics, type LyricLine } from "@/lib/lyrics";
+import { parseLyrics } from "@/utils/lyrics";
+import type { LyricLine } from "@/types";
 import { useT } from "@/components/I18n";
 
 const cache = new Map<string, LyricLine[]>();

@@ -4,7 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChevronRight, ListMusic, Loader2, Plus } from "lucide-react";
-import { cleanName, createPlaylist, type PlaylistItem } from "@/lib/playlists";
+import { cleanName, createPlaylist } from "@/services/playlists";
+import type { PlaylistItem } from "@/types";
 import { useT } from "@/components/I18n";
 
 export function PlaylistsView({ lists }: { lists: PlaylistItem[] }) {

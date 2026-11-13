@@ -4,8 +4,8 @@ import { DeleteSongButton } from "./DeleteSongButton";
 import { Cover } from "@/components/Cover";
 import { Empty, PageTitle } from "@/components/ui";
 import { requireAdmin } from "@/lib/auth";
-import { listGenres, searchSongs } from "@/lib/library";
-import { getT } from "@/lib/i18n-server";
+import { listGenres, searchSongs } from "@/services/library";
+import { getT } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).admin.manageSongs };
@@ -18,7 +18,7 @@ export default async function AdminSongs({
 }) {
   const sp = await searchParams;
   const { supabase } = await requireAdmin();
-  const sort = sp.sort === "az" ? "az" : "new";
+  const sort = sp.sort === "az" || sp.sort === "plays" ? sp.sort : "new";
   const [genres, { songs, total }, T] = await Promise.all([
     listGenres(supabase),
     searchSongs(supabase, { q: sp.q, genre: sp.genre, sort, limit: 200 }),
@@ -39,6 +39,7 @@ export default async function AdminSongs({
         <select name="sort" defaultValue={sort} aria-label={T.common.sort} className="rounded-xl border border-border bg-surface px-3 py-2.5">
           <option value="new">{T.common.newest}</option>
           <option value="az">{T.common.az}</option>
+          <option value="plays">{T.common.mostPlayed}</option>
         </select>
         <button className="rounded-xl bg-accent px-4 py-2.5 text-sm font-medium text-white">{t.apply}</button>
       </form>

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Empty } from "@/components/ui";
 import { requireUser, withCovers } from "@/lib/auth";
-import { SONG_SELECT, type Song } from "@/lib/types";
+import { SONG_SELECT } from "@/constants/songs";
+import type { Song } from "@/types";
 import { PlaylistView } from "./PlaylistView";
-import { getT } from "@/lib/i18n-server";
+import { getT } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).playlists.playlist };

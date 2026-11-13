@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
-import { VIBES, VOICES, type Voice } from "@/lib/requests";
+import { VIBES, VOICES } from "@/constants/requests";
+import type { Voice } from "@/types";
 import { useT } from "@/components/I18n";
 
 const field = "w-full rounded-xl border border-border bg-surface-2 px-3 py-2.5 text-base outline-none focus:border-accent";

@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/client";
-
-export type PlaylistItem = { id: string; name: string; count: number };
+import type { PlaylistItem } from "@/types";
 
 const sb = () => createClient();
 export const cleanName = (s: string) => s.replace(/\s+/g, " ").trim().slice(0, 60);

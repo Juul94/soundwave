@@ -4,8 +4,9 @@ import { Heart, Music, Upload, UserPlus, Users } from "lucide-react";
 import { Cover } from "@/components/Cover";
 import { PageTitle } from "@/components/ui";
 import { requireAdmin, withCovers } from "@/lib/auth";
-import { SONG_SELECT, type Song } from "@/lib/types";
-import { getT } from "@/lib/i18n-server";
+import { SONG_SELECT } from "@/constants/songs";
+import type { Song } from "@/types";
+import { getT } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).admin.nav };

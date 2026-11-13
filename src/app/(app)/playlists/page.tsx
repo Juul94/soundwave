@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageTitle } from "@/components/ui";
 import { requireUser } from "@/lib/auth";
 import { PlaylistsView } from "./PlaylistsView";
-import { getT } from "@/lib/i18n-server";
+import { getT } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).playlists.title };

@@ -6,9 +6,9 @@ import { CheckCircle2, ImagePlus, Loader2, Music, Sparkles, UploadCloud, X } fro
 import { createClient } from "@/lib/supabase/client";
 import { inputCls } from "@/components/AuthShell";
 import { forgetLyrics } from "@/components/player/Lyrics";
-import type { Genre, SongView } from "@/lib/types";
+import type { Genre, SongView } from "@/types";
 import { useT } from "@/components/I18n";
-import type { Dict } from "@/lib/i18n";
+import type { Dict } from "@/i18n/dictionary";
 
 const MAX_COVER = 5 * 1024 * 1024;
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import { dict, type Lang } from "@/lib/i18n";
+import { dict, type Lang } from "@/i18n/dictionary";
 
 const Ctx = createContext<Lang>("en");
 

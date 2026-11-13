@@ -1,5 +1,4 @@
-/** One lyric line; `gap` marks the start of a new verse. */
-export type LyricLine = { text: string; gap?: boolean };
+import type { LyricLine } from "@/types";
 
 const TAG = /^\[[^\]]*\]$/; // Suno section tags like [Verse 1] or [Chorus]
 

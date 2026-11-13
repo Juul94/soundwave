@@ -5,8 +5,8 @@ import { CastButton } from "@/components/player/CastButton";
 import { SongList } from "@/components/SongList";
 import { Empty, PageTitle } from "@/components/ui";
 import { requireUser } from "@/lib/auth";
-import { listGenres, PAGE_SIZE, searchSongs } from "@/lib/library";
-import { getT } from "@/lib/i18n-server";
+import { listGenres, PAGE_SIZE, searchSongs } from "@/services/library";
+import { getT } from "@/i18n/server";
 
 export const metadata: Metadata = { title: "Soundwave" };
 
@@ -18,7 +18,7 @@ export default async function HomePage({
   const sp = await searchParams;
   const t = await getT();
   const { supabase } = await requireUser();
-  const sort = sp.sort === "az" ? "az" : "new";
+  const sort = sp.sort === "az" || sp.sort === "plays" ? sp.sort : "new";
   const limit = Math.min(Math.max(Number(sp.limit) || PAGE_SIZE, PAGE_SIZE), 400);
   const [genres, { songs, total }] = await Promise.all([
     listGenres(supabase),

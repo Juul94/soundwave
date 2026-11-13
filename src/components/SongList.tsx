@@ -9,7 +9,7 @@ import { useFavorites } from "@/components/FavoritesProvider";
 import { PlaylistPicker } from "@/components/PlaylistPicker";
 import { usePlaylistScope } from "@/components/PlaylistScope";
 import { usePlayer } from "@/components/player/PlayerProvider";
-import type { SongView } from "@/lib/types";
+import type { SongView } from "@/types";
 import { useT } from "@/components/I18n";
 
 export function FavButton({ songId, className = "" }: { songId: string; className?: string }) {

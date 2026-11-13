@@ -6,7 +6,7 @@ import { useFavorites } from "@/components/FavoritesProvider";
 import { usePlayer } from "@/components/player/PlayerProvider";
 import { SongList } from "@/components/SongList";
 import { Empty } from "@/components/ui";
-import type { SongView } from "@/lib/types";
+import type { SongView } from "@/types";
 import { useT } from "@/components/I18n";
 
 export function FavoritesList({ songs }: { songs: SongView[] }) {

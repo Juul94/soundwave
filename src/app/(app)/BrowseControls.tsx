@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 import { useEffect, useOptimistic, useState, useTransition } from "react";
 import { ChevronDown, Loader2, RotateCcw, Search, Shuffle } from "lucide-react";
 import { usePlayer } from "@/components/player/PlayerProvider";
-import type { Genre, SongView } from "@/lib/types";
+import type { Genre, SongView } from "@/types";
 import { useT } from "@/components/I18n";
 
 export function BrowseControls({
   genres, songs, q, genre, sort, children,
-}: { genres: Genre[]; songs: SongView[]; q: string; genre: string; sort: "new" | "az"; children: React.ReactNode }) {
+}: { genres: Genre[]; songs: SongView[]; q: string; genre: string; sort: "new" | "az" | "plays"; children: React.ReactNode }) {
   const router = useRouter();
   const p = usePlayer();
   const tr = useT();
@@ -26,7 +26,7 @@ export function BrowseControls({
     if (v.sort && v.sort !== "new") sp.set("sort", v.sort);
     start(() => {
       if (next.genre !== undefined) setOptGenre(next.genre);
-      if (next.sort !== undefined) setOptSort(next.sort as "new" | "az");
+      if (next.sort !== undefined) setOptSort(next.sort as "new" | "az" | "plays");
       router.replace(`/${sp.size ? `?${sp}` : ""}`);
     });
   };
@@ -88,6 +88,7 @@ export function BrowseControls({
           >
             <option value="new">{tr.common.newest}</option>
             <option value="az">{tr.common.az}</option>
+            <option value="plays">{tr.common.mostPlayed}</option>
           </select>
           <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted" />
         </div>

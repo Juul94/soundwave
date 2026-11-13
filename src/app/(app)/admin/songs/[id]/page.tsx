@@ -3,9 +3,9 @@ import { notFound } from "next/navigation";
 import { SongForm } from "../../SongForm";
 import { PageTitle } from "@/components/ui";
 import { requireAdmin, withCovers } from "@/lib/auth";
-import { listGenres } from "@/lib/library";
-import type { Song } from "@/lib/types";
-import { getT } from "@/lib/i18n-server";
+import { listGenres } from "@/services/library";
+import type { Song } from "@/types";
+import { getT } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).admin.editSong };

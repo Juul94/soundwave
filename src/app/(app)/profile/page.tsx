@@ -4,8 +4,8 @@ import { LogOut, ShieldCheck } from "lucide-react";
 import { logout } from "@/app/login/actions";
 import { PageTitle } from "@/components/ui";
 import { requireUser } from "@/lib/auth";
-import { getLang, getT } from "@/lib/i18n-server";
-import { setLang } from "@/lib/lang-action";
+import { getLang, getT } from "@/i18n/server";
+import { setLang } from "@/i18n/actions";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).profile.title };

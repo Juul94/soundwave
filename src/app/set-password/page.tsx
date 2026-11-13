@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { SetPasswordForm } from "./SetPasswordForm";
 import { AuthShell } from "@/components/AuthShell";
 import { createClient } from "@/lib/supabase/server";
-import { getT } from "@/lib/i18n-server";
+import { getT } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).auth.setPassword };

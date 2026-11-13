@@ -1,6 +1,6 @@
 // Google Cast (Chromecast) sender: plays on the TV through Google's free Default Media Receiver,
 // which shows the cover, title and artist. Only Chrome/Edge ship the Cast SDK.
-import type { SongView } from "./types";
+import type { SongView } from "@/types";
 
 let ready: Promise<boolean> | null = null;
 let sdkOk = false;

@@ -3,9 +3,8 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { getT } from "@/lib/i18n-server";
-
-export type FormState = { error?: string; message?: string } | undefined;
+import { getT } from "@/i18n/server";
+import type { FormState } from "@/types";
 
 export async function login(_: FormState, formData: FormData): Promise<FormState> {
   const email = String(formData.get("email") ?? "").trim();

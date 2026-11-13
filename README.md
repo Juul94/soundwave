@@ -7,7 +7,7 @@ A private music streaming web app for family and friends. An admin uploads songs
 ## Features
 
 **For members**
-- **Library**: search all songs, filter by genre and sort by newest or A–Z.
+- **Library**: search all songs, filter by genre and sort by newest, A–Z or most played.
 - **Player**: a mini player and a full-screen player with queue, shuffle, repeat (off / all / one) and seeking. Lock-screen and headset controls work through the Media Session API.
 - **Lyrics** in the full player. Section tags such as `[Verse 1]` and `[Chorus]` are turned into verse breaks.
 - **Playlists and favorites**: personal playlists you can add to from anywhere, and a favorites list.
@@ -44,8 +44,13 @@ A private music streaming web app for family and friends. An admin uploads songs
 | Audio ML | TensorFlow.js, Essentia.js (WebAssembly), MusiCNN genre models |
 | Casting | Google Cast Web Sender SDK |
 | Platform | PWA (web manifest, service worker, generated icons), hosted on Vercel |
+| Tests | Jest, Testing Library |
+| Component library | Storybook 10 with the accessibility addon |
+| CI | GitHub Actions: lint, typecheck and tests on every push |
 
 ## Project structure
+
+Every folder in `src` has one job. [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) explains the layers and how a request flows through them.
 
 ```
 src/
@@ -56,15 +61,24 @@ src/
     api/cover/              Session-checked cover images
     login/ forgot-password/ set-password/ auth/   Login, reset and invite flows
     manifest.ts pwa-icon/   PWA manifest and generated icons
-  components/
+  components/               React components and their Storybook stories
     player/                 PlayerProvider (queue, shuffle, repeat, signed URLs), mini/full player, lyrics, cast
     InstallGate.tsx         Install-to-home-screen guide
     I18n.tsx                Language context
-  lib/
+  services/                 Data access: Supabase queries (library.ts, playlists.ts)
+  lib/                      Integrations
     supabase/               Browser, server and admin (service role) clients
+    auth.ts                 requireUser and requireAdmin
     genreSuggest.ts         In-browser genre detection
     cast.ts                 Chromecast sender
-    lyrics.ts playlists.ts requests.ts library.ts i18n.tsx
+  utils/                    Pure helper functions (lyrics.ts)
+  constants/                Fixed values (songs.ts, requests.ts)
+  i18n/                     English and Danish texts, language helpers
+  types/                    Shared TypeScript types, one file per domain
+__tests__/                  Jest tests, mirroring the folders in src/
+.storybook/                 Storybook setup
+.claude/CLAUDE.md           Project rules for the Claude Code agent
+docs/ARCHITECTURE.md        Layers, request flow, tests and component library
 supabase/
   migrations/               Schema, RLS policies, storage buckets, functions
   promote_initial_admin.sql One-time script that makes the first user admin
@@ -106,6 +120,17 @@ npm run dev
 ```
 
 Open http://localhost:3000, log in, and invite others from *Admin > Users*.
+
+### Scripts
+
+```bash
+npm run dev          # dev server
+npm run build        # production build
+npm run lint         # ESLint
+npm run typecheck    # TypeScript
+npm test             # Jest tests
+npm run storybook    # component library on http://localhost:6006
+```
 
 ### Environment variables
 

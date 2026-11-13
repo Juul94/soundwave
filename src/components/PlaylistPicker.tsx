@@ -5,9 +5,9 @@ import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import { Check, Loader2, Plus, X } from "lucide-react";
 import {
-  addToPlaylist, cleanName, createPlaylist, myPlaylists, playlistsWith, removeFromPlaylist, type PlaylistItem,
-} from "@/lib/playlists";
-import type { SongView } from "@/lib/types";
+  addToPlaylist, cleanName, createPlaylist, myPlaylists, playlistsWith, removeFromPlaylist,
+} from "@/services/playlists";
+import type { PlaylistItem, SongView } from "@/types";
 import { useT } from "@/components/I18n";
 
 /** Sheet to add a song to (or remove it from) the user's playlists, or to a new one. */

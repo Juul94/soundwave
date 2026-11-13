@@ -2,7 +2,7 @@ import "server-only";
 import { cache } from "react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import type { Profile } from "@/lib/types";
+import type { Profile } from "@/types";
 
 /**
  * Returns the signed-in, active user's profile or redirects to /login.

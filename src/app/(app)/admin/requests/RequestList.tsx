@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Check, RotateCcw, Trash2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
-import type { SongRequest } from "@/lib/requests";
+import type { SongRequest } from "@/types";
 import { useT } from "@/components/I18n";
 import { requestsChanged } from "@/components/RequestCount";
 

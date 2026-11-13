@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Cast } from "lucide-react";
 import { usePlayer } from "./PlayerProvider";
-import type { CastNote } from "@/lib/i18n";
+import type { CastNote } from "@/i18n/dictionary";
 import { useT } from "@/components/I18n";
 
 /** Cast to a TV/speaker (Chromecast or AirPlay); hidden where the browser can't cast. */

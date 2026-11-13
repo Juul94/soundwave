@@ -1,7 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { LANGS, type Lang } from "@/lib/i18n";
+import { LANGS, type Lang } from "@/i18n/dictionary";
 
 export async function setLang(lang: Lang) {
   if (!LANGS.includes(lang)) return;

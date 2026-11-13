@@ -2,13 +2,11 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import type { SongView } from "@/lib/types";
-import type { CastNote, PlayerError } from "@/lib/i18n";
+import type { Repeat, SongView } from "@/types";
+import type { CastNote, PlayerError } from "@/i18n/dictionary";
 import {
   castActive, castHasMedia, castLoad, castRequest, castSeek, castTime, castToggle, loadCastSdk, watchCast, type CastEvents,
 } from "@/lib/cast";
-
-export type Repeat = "off" | "all" | "one";
 
 type PlayerCtx = {
   current: SongView | null;

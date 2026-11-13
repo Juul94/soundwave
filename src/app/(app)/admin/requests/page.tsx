@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { PageTitle } from "@/components/ui";
 import { requireAdmin } from "@/lib/auth";
-import type { SongRequest } from "@/lib/requests";
+import type { SongRequest } from "@/types";
 import { RequestList } from "./RequestList";
-import { getT } from "@/lib/i18n-server";
+import { getT } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).admin.requestsTitle };

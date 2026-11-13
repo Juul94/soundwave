@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { Voice } from "@/lib/requests";
+import type { Voice } from "@/types";
 
 export const LANGS = ["da", "en"] as const;
 export type Lang = (typeof LANGS)[number];
@@ -21,7 +21,8 @@ const en = {
     undo: "Undo",
     all: "All",
     newest: "Newest",
-    az: "A–Z",
+    az: "A-Z",
+    mostPlayed: "Most played",
     sort: "Sort",
     reset: "Reset",
     edit: "Edit",
@@ -408,6 +409,7 @@ const da: Dict = {
     all: "Alle",
     newest: "Nyeste",
     az: "A–Å",
+    mostPlayed: "Mest afspillet",
     sort: "Sortér",
     reset: "Nulstil",
     edit: "Rediger",

@@ -1,15 +1,3 @@
-export type Role = "admin" | "user";
-
-export type Profile = {
-  id: string;
-  email: string | null;
-  display_name: string | null;
-  role: Role;
-  is_active: boolean;
-  created_at: string;
-  last_seen_app: string | null;
-};
-
 export type Genre = { id: string; name: string; slug: string; created_at: string };
 
 export type Song = {
@@ -35,5 +23,3 @@ export type Song = {
 
 /** Song enriched with a short-lived signed cover URL. */
 export type SongView = Song & { cover_url: string | null; cover_thumb: string | null };
-
-export const SONG_SELECT = "*, genres(name, slug)";

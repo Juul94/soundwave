@@ -4,9 +4,8 @@ import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { requireAdmin } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getT } from "@/lib/i18n-server";
-
-export type ActionResult = { ok: boolean; error?: string; message?: string };
+import { getT } from "@/i18n/server";
+import type { ActionResult } from "@/types";
 
 const slugify = (s: string) =>
   s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "genre";

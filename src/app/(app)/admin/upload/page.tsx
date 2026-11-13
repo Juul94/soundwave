@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { SongForm } from "../SongForm";
 import { PageTitle } from "@/components/ui";
 import { requireAdmin } from "@/lib/auth";
-import { listGenres } from "@/lib/library";
-import { getT } from "@/lib/i18n-server";
+import { listGenres } from "@/services/library";
+import { getT } from "@/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).admin.tabs.upload };

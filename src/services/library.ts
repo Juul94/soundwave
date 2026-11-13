@@ -1,7 +1,8 @@
 import "server-only";
 import type { createClient } from "@/lib/supabase/server";
 import { withCovers } from "@/lib/auth";
-import { SONG_SELECT, type Genre, type Song } from "@/lib/types";
+import { SONG_SELECT } from "@/constants/songs";
+import type { Genre, Song } from "@/types";
 
 type Sb = Awaited<ReturnType<typeof createClient>>;
 
@@ -17,7 +18,7 @@ export async function listGenres(sb: Sb) {
 
 export async function searchSongs(
   sb: Sb,
-  o: { q?: string; genre?: string; sort?: "new" | "az"; limit?: number },
+  o: { q?: string; genre?: string; sort?: "new" | "az" | "plays"; limit?: number },
 ) {
   // genre filter via an inner join, so it is one round trip instead of slug lookup + query
   let query = sb.from("songs").select(o.genre ? "*, genres!inner(name, slug)" : SONG_SELECT, { count: "exact" });
@@ -34,7 +35,9 @@ export async function searchSongs(
 
   query = o.sort === "az"
     ? query.order("title", { ascending: true })
-    : query.order("created_at", { ascending: false });
+    : o.sort === "plays"
+      ? query.order("plays", { ascending: false }).order("created_at", { ascending: false })
+      : query.order("created_at", { ascending: false });
 
   const { data, count } = await query.limit(o.limit ?? PAGE_SIZE);
   return { songs: await withCovers(sb, (data ?? []) as Song[]), total: count ?? 0 };
