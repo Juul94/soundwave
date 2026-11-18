@@ -7,7 +7,11 @@ import type { SongRequest } from "@/types";
 import { useT } from "@/components/I18n";
 import { requestsChanged } from "@/components/RequestCount";
 
-export function RequestList({ initial }: { initial: SongRequest[] }) {
+type RequestListProps = {
+  initial: SongRequest[];
+};
+
+export function RequestList({ initial }: RequestListProps) {
   const [items, setItems] = useState(initial);
   const [error, setError] = useState<string | null>(null);
   const sb = createClient();

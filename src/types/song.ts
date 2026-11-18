@@ -21,5 +21,8 @@ export type Song = {
   genres?: { name: string; slug: string } | null;
 };
 
+/** Order of a song list: newest first, title A–Z, or most played. */
+export type SongSort = "new" | "az" | "plays";
+
 /** Song enriched with a short-lived signed cover URL. */
 export type SongView = Song & { cover_url: string | null; cover_thumb: string | null };

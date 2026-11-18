@@ -6,7 +6,12 @@ import { setPassword } from "@/app/login/actions";
 import { btnCls, inputCls } from "@/components/AuthShell";
 import { useT } from "@/components/I18n";
 
-export function SetPasswordForm({ isNew, defaultName }: { isNew: boolean; defaultName: string }) {
+type SetPasswordFormProps = {
+  isNew: boolean;
+  defaultName: string;
+};
+
+export function SetPasswordForm({ isNew, defaultName }: SetPasswordFormProps) {
   const [state, action, pending] = useActionState(setPassword, undefined);
   const [name, setName] = useState(defaultName);
   const [show, setShow] = useState(false);

@@ -5,7 +5,12 @@ import { Trash2 } from "lucide-react";
 import { deleteSong } from "../actions";
 import { useT } from "@/components/I18n";
 
-export function DeleteSongButton({ id, title }: { id: string; title: string }) {
+type DeleteSongButtonProps = {
+  id: string;
+  title: string;
+};
+
+export function DeleteSongButton({ id, title }: DeleteSongButtonProps) {
   const [pending, start] = useTransition();
   const [err, setErr] = useState<string | null>(null);
   const t = useT().admin;

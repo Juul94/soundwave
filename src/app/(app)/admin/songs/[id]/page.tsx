@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).admin.editSong };
 }
 
-export default async function EditSongPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function EditSongPage({ params }: PageProps<"/admin/songs/[id]">) {
   const { id } = await params;
   const { supabase } = await requireAdmin();
   const { data } = await supabase.from("songs").select("*").eq("id", id).maybeSingle<Song>();

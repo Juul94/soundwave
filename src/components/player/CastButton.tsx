@@ -6,8 +6,12 @@ import { usePlayer } from "./PlayerProvider";
 import type { CastNote } from "@/i18n/dictionary";
 import { useT } from "@/components/I18n";
 
+type CastButtonProps = {
+  className?: string;
+};
+
 /** Cast to a TV/speaker (Chromecast or AirPlay); hidden where the browser can't cast. */
-export function CastButton({ className = "" }: { className?: string }) {
+export function CastButton({ className = "" }: CastButtonProps) {
   const p = usePlayer();
   const [note, setNote] = useState<CastNote | null>(null);
   const t = useT().player;

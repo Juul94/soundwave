@@ -12,7 +12,12 @@ import { usePlayer } from "@/components/player/PlayerProvider";
 import type { SongView } from "@/types";
 import { useT } from "@/components/I18n";
 
-export function FavButton({ songId, className = "" }: { songId: string; className?: string }) {
+type FavButtonProps = {
+  songId: string;
+  className?: string;
+};
+
+export function FavButton({ songId, className = "" }: FavButtonProps) {
   const fav = useFavorites();
   const on = fav.has(songId);
   const t = useT();
@@ -48,7 +53,12 @@ async function downloadSong(song: SongView) {
   return true;
 }
 
-export function DownloadButton({ song, className = "" }: { song: SongView; className?: string }) {
+type DownloadButtonProps = {
+  song: SongView;
+  className?: string;
+};
+
+export function DownloadButton({ song, className = "" }: DownloadButtonProps) {
   const [busy, setBusy] = useState(false);
   const [failed, setFailed] = useState(false);
   const t = useT();
@@ -73,8 +83,13 @@ export function DownloadButton({ song, className = "" }: { song: SongView; class
   );
 }
 
+type SongMenuProps = {
+  song: SongView;
+  className?: string;
+};
+
 /** ⋮ button with playlists, Download and Favorite. */
-export function SongMenu({ song, className = "" }: { song: SongView; className?: string }) {
+export function SongMenu({ song, className = "" }: SongMenuProps) {
   const fav = useFavorites();
   const p = usePlayer();
   const scope = usePlaylistScope();
@@ -196,8 +211,13 @@ export function SongMenu({ song, className = "" }: { song: SongView; className?:
 
 const SWIPE = 80;
 
+type SongRowProps = {
+  song: SongView;
+  list: SongView[];
+};
+
 /** Row: tap plays; swipe right = play next, swipe left = toggle favorite. */
-export function SongRow({ song, list }: { song: SongView; list: SongView[] }) {
+export function SongRow({ song, list }: SongRowProps) {
   const p = usePlayer();
   const fav = useFavorites();
   const active = p.current?.id === song.id;
@@ -309,7 +329,11 @@ export function SongRow({ song, list }: { song: SongView; list: SongView[] }) {
   );
 }
 
-export function SongList({ songs }: { songs: SongView[] }) {
+type SongListProps = {
+  songs: SongView[];
+};
+
+export function SongList({ songs }: SongListProps) {
   return (
     <ul className="space-y-1">
       {songs.map((s) => (
@@ -319,7 +343,12 @@ export function SongList({ songs }: { songs: SongView[] }) {
   );
 }
 
-export function SongCard({ song, list }: { song: SongView; list: SongView[] }) {
+type SongCardProps = {
+  song: SongView;
+  list: SongView[];
+};
+
+export function SongCard({ song, list }: SongCardProps) {
   const p = usePlayer();
   const active = p.current?.id === song.id;
   const t = useT();
@@ -343,7 +372,12 @@ export function SongCard({ song, list }: { song: SongView; list: SongView[] }) {
   );
 }
 
-export function SongShelf({ title, songs }: { title: string; songs: SongView[] }) {
+type SongShelfProps = {
+  title: string;
+  songs: SongView[];
+};
+
+export function SongShelf({ title, songs }: SongShelfProps) {
   if (!songs.length) return null;
   return (
     <section className="mb-8">

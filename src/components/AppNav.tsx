@@ -26,7 +26,11 @@ function useActive() {
   return (href: string) => (href === "/" ? path === "/" : path.startsWith(href));
 }
 
-export function Sidebar({ isAdmin }: { isAdmin: boolean }) {
+type SidebarProps = {
+  isAdmin: boolean;
+};
+
+export function Sidebar({ isAdmin }: SidebarProps) {
   const active = useActive();
   const items = navItems(isAdmin);
   const t = useT();
@@ -54,7 +58,11 @@ export function Sidebar({ isAdmin }: { isAdmin: boolean }) {
   );
 }
 
-export function BottomNav({ isAdmin }: { isAdmin: boolean }) {
+type BottomNavProps = {
+  isAdmin: boolean;
+};
+
+export function BottomNav({ isAdmin }: BottomNavProps) {
   const active = useActive();
   const t = useT();
   const requests = useRequestCount();

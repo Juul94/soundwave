@@ -1,7 +1,13 @@
 import { LogoMark } from "@/components/Logo";
 import { AuthFooter } from "@/components/I18n";
 
-export function AuthShell({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
+type AuthShellProps = {
+  title: string;
+  subtitle?: string;
+  children: React.ReactNode;
+};
+
+export function AuthShell({ title, subtitle, children }: AuthShellProps) {
   return (
     <main className="relative flex min-h-dvh items-center justify-center overflow-hidden px-4 safe-t safe-b">
       <div className="pointer-events-none absolute -top-40 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-accent/25 blur-3xl" />

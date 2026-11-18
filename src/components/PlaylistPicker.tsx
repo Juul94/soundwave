@@ -10,8 +10,13 @@ import {
 import type { PlaylistItem, SongView } from "@/types";
 import { useT } from "@/components/I18n";
 
+type PlaylistPickerProps = {
+  song: SongView;
+  onClose: () => void;
+};
+
 /** Sheet to add a song to (or remove it from) the user's playlists, or to a new one. */
-export function PlaylistPicker({ song, onClose }: { song: SongView; onClose: () => void }) {
+export function PlaylistPicker({ song, onClose }: PlaylistPickerProps) {
   const router = useRouter();
   const t = useT();
   const [lists, setLists] = useState<PlaylistItem[] | null>(null);

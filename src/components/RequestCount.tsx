@@ -7,8 +7,14 @@ import { createClient } from "@/lib/supabase/client";
 const EVENT = "sw:requests-changed";
 const Ctx = createContext(0);
 
+type RequestCountProviderProps = {
+  isAdmin: boolean;
+  initial: number;
+  children: React.ReactNode;
+};
+
 /** Number of open ("new") song requests, for the admin badge. Refreshes on navigation, app focus and after edits. */
-export function RequestCountProvider({ isAdmin, initial, children }: { isAdmin: boolean; initial: number; children: React.ReactNode }) {
+export function RequestCountProvider({ isAdmin, initial, children }: RequestCountProviderProps) {
   const [count, setCount] = useState(initial);
   const path = usePathname();
   useEffect(() => {
@@ -33,7 +39,12 @@ export function RequestCountProvider({ isAdmin, initial, children }: { isAdmin: 
 export const useRequestCount = () => useContext(Ctx);
 export const requestsChanged = () => window.dispatchEvent(new Event(EVENT));
 
-export function CountBadge({ n, className = "" }: { n: number; className?: string }) {
+type CountBadgeProps = {
+  n: number;
+  className?: string;
+};
+
+export function CountBadge({ n, className = "" }: CountBadgeProps) {
   if (!n) return null;
   return (
     <span className={`min-w-4 rounded-full bg-red-500 px-1 text-center text-[10px] font-semibold leading-4 text-white ${className}`}>

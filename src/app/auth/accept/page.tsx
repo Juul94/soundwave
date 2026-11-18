@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
 import { AuthShell, btnCls } from "@/components/AuthShell";
 import { getT } from "@/i18n/server";
+import { firstParam } from "@/utils/searchParams";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).auth.acceptInvitation };
 }
 
-export default async function AcceptPage({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
-  const { token_hash, type } = await searchParams;
-  const href = `/auth/confirm?${new URLSearchParams({ token_hash: token_hash ?? "", type: type ?? "", go: "1" })}`;
+export default async function AcceptPage({ searchParams }: PageProps<"/auth/accept">) {
+  const sp = await searchParams;
+  const tokenHash = firstParam(sp.token_hash) ?? "";
+  const type = firstParam(sp.type) ?? "";
+  const href = `/auth/confirm?${new URLSearchParams({ token_hash: tokenHash, type, go: "1" })}`;
   const invite = type === "invite";
   const t = await getT();
   return (

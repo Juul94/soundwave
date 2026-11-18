@@ -10,8 +10,12 @@ import { useT } from "@/components/I18n";
 const cache = new Map<string, LyricLine[]>();
 export const forgetLyrics = (songId: string) => cache.delete(songId);
 
+type LyricsPanelProps = {
+  songId: string;
+};
+
 /** Lyrics for the current song. Mount with key={songId}. */
-export function LyricsPanel({ songId }: { songId: string }) {
+export function LyricsPanel({ songId }: LyricsPanelProps) {
   const [lines, setLines] = useState<LyricLine[] | undefined>(() => cache.get(songId));
   const t = useT().player;
 

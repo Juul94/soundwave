@@ -4,12 +4,20 @@ import { useRouter } from "next/navigation";
 import { useEffect, useOptimistic, useState, useTransition } from "react";
 import { ChevronDown, Loader2, RotateCcw, Search, Shuffle } from "lucide-react";
 import { usePlayer } from "@/components/player/PlayerProvider";
-import type { Genre, SongView } from "@/types";
+import type { Genre, SongSort, SongView } from "@/types";
 import { useT } from "@/components/I18n";
+import { parseSongSort } from "@/utils/searchParams";
 
-export function BrowseControls({
-  genres, songs, q, genre, sort, children,
-}: { genres: Genre[]; songs: SongView[]; q: string; genre: string; sort: "new" | "az" | "plays"; children: React.ReactNode }) {
+type BrowseControlsProps = {
+  genres: Genre[];
+  songs: SongView[];
+  q: string;
+  genre: string;
+  sort: SongSort;
+  children: React.ReactNode;
+};
+
+export function BrowseControls({ genres, songs, q, genre, sort, children }: BrowseControlsProps) {
   const router = useRouter();
   const p = usePlayer();
   const tr = useT();
@@ -18,7 +26,7 @@ export function BrowseControls({
   const [optGenre, setOptGenre] = useOptimistic(genre);
   const [optSort, setOptSort] = useOptimistic(sort);
 
-  const go = (next: { q?: string; genre?: string; sort?: string }) => {
+  const go = (next: { q?: string; genre?: string; sort?: SongSort }) => {
     const sp = new URLSearchParams();
     const v = { q: text, genre, sort, ...next };
     if (v.q) sp.set("q", v.q);
@@ -26,7 +34,7 @@ export function BrowseControls({
     if (v.sort && v.sort !== "new") sp.set("sort", v.sort);
     start(() => {
       if (next.genre !== undefined) setOptGenre(next.genre);
-      if (next.sort !== undefined) setOptSort(next.sort as "new" | "az" | "plays");
+      if (next.sort !== undefined) setOptSort(next.sort);
       router.replace(`/${sp.size ? `?${sp}` : ""}`);
     });
   };
@@ -83,7 +91,7 @@ export function BrowseControls({
           <select
             aria-label={tr.common.sort}
             value={optSort}
-            onChange={(e) => go({ sort: e.target.value })}
+            onChange={(e) => go({ sort: parseSongSort(e.target.value) })}
             className="appearance-none rounded-xl border border-border bg-surface py-2 pl-3 pr-9 text-sm outline-none focus:border-accent"
           >
             <option value="new">{tr.common.newest}</option>

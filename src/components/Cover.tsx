@@ -8,20 +8,16 @@ function hue(id: string) {
   return HUES[h % HUES.length];
 }
 
-/** Square artwork with a deterministic gradient fallback when there is no cover. */
-export function Cover({
-  id,
-  url,
-  alt = "",
-  className = "",
-  priority = false,
-}: {
+type CoverProps = {
   id: string;
   url: string | null;
   alt?: string;
   className?: string;
   priority?: boolean;
-}) {
+};
+
+/** Square artwork with a deterministic gradient fallback when there is no cover. */
+export function Cover({ id, url, alt = "", className = "", priority = false }: CoverProps) {
   if (url) {
     return (
       // eslint-disable-next-line @next/next/no-img-element

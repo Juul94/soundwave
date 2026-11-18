@@ -12,15 +12,13 @@ export const useFavorites = () => {
   return c;
 };
 
-export function FavoritesProvider({
-  userId,
-  initial,
-  children,
-}: {
+type FavoritesProviderProps = {
   userId: string;
   initial: string[];
   children: React.ReactNode;
-}) {
+};
+
+export function FavoritesProvider({ userId, initial, children }: FavoritesProviderProps) {
   const supabase = useMemo(() => createClient(), []);
   const [ids, setIds] = useState(() => new Set(initial));
 

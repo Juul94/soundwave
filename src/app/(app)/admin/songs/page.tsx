@@ -6,22 +6,21 @@ import { Empty, PageTitle } from "@/components/ui";
 import { requireAdmin } from "@/lib/auth";
 import { listGenres, searchSongs } from "@/services/library";
 import { getT } from "@/i18n/server";
+import { firstParam, parseSongSort } from "@/utils/searchParams";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).admin.manageSongs };
 }
 
-export default async function AdminSongs({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string; genre?: string; sort?: string }>;
-}) {
+export default async function AdminSongs({ searchParams }: PageProps<"/admin/songs">) {
   const sp = await searchParams;
+  const q = firstParam(sp.q) ?? "";
+  const genre = firstParam(sp.genre) ?? "";
+  const sort = parseSongSort(sp.sort);
   const { supabase } = await requireAdmin();
-  const sort = sp.sort === "az" || sp.sort === "plays" ? sp.sort : "new";
   const [genres, { songs, total }, T] = await Promise.all([
     listGenres(supabase),
-    searchSongs(supabase, { q: sp.q, genre: sp.genre, sort, limit: 200 }),
+    searchSongs(supabase, { q, genre, sort, limit: 200 }),
     getT(),
   ]);
   const t = T.admin;
@@ -30,9 +29,9 @@ export default async function AdminSongs({
     <>
       <PageTitle title={t.songsTitle} sub={t.total(total)} />
       <form className="mb-5 flex flex-wrap gap-2" role="search">
-        <input name="q" defaultValue={sp.q} placeholder={T.browse.searchSongs} aria-label={T.browse.searchSongs}
+        <input name="q" defaultValue={q} placeholder={T.browse.searchSongs} aria-label={T.browse.searchSongs}
           className="min-w-0 flex-1 rounded-xl border border-border bg-surface px-4 py-2.5 outline-none focus:border-accent" />
-        <select name="genre" defaultValue={sp.genre ?? ""} aria-label={t.genre} className="rounded-xl border border-border bg-surface px-3 py-2.5">
+        <select name="genre" defaultValue={genre} aria-label={t.genre} className="rounded-xl border border-border bg-surface px-3 py-2.5">
           <option value="">{t.allGenres}</option>
           {genres.map((g) => <option key={g.id} value={g.slug}>{g.name}</option>)}
         </select>

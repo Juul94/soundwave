@@ -5,7 +5,12 @@ import { dict, type Lang } from "@/i18n/dictionary";
 
 const Ctx = createContext<Lang>("en");
 
-export function I18nProvider({ lang, children }: { lang: Lang; children: React.ReactNode }) {
+type I18nProviderProps = {
+  lang: Lang;
+  children: React.ReactNode;
+};
+
+export function I18nProvider({ lang, children }: I18nProviderProps) {
   return <Ctx value={lang}>{children}</Ctx>;
 }
 

@@ -80,9 +80,14 @@ function readDuration(file: File) {
   });
 }
 
-export function SongForm({
-  genres, song, maxAudioMb, lyrics: initialLyrics = "",
-}: { genres: Genre[]; song?: SongView; maxAudioMb: number; lyrics?: string }) {
+type SongFormProps = {
+  genres: Genre[];
+  song?: SongView;
+  maxAudioMb: number;
+  lyrics?: string;
+};
+
+export function SongForm({ genres, song, maxAudioMb, lyrics: initialLyrics = "" }: SongFormProps) {
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const editing = !!song;

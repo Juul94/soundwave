@@ -7,7 +7,12 @@ import { login } from "./actions";
 import { btnCls, inputCls } from "@/components/AuthShell";
 import { useT } from "@/components/I18n";
 
-export function LoginForm({ initialError, next }: { initialError?: string; next?: string }) {
+type LoginFormProps = {
+  initialError?: string;
+  next?: string;
+};
+
+export function LoginForm({ initialError, next }: LoginFormProps) {
   const [state, action, pending] = useActionState(login, undefined);
   const error = state?.error ?? initialError;
   const [email, setEmail] = useState("");

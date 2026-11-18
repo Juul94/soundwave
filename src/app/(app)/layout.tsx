@@ -7,7 +7,7 @@ import { MiniPlayer } from "@/components/player/MiniPlayer";
 import { PlayerProvider } from "@/components/player/PlayerProvider";
 import { requireUser } from "@/lib/auth";
 
-export default async function AppLayout({ children }: { children: React.ReactNode }) {
+export default async function AppLayout({ children }: LayoutProps<"/">) {
   const { supabase, user, profile } = await requireUser();
   const isAdmin = profile.role === "admin";
   const [{ data: favs }, { count: openRequests }] = await Promise.all([

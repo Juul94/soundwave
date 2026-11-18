@@ -9,7 +9,11 @@ import { Empty } from "@/components/ui";
 import type { SongView } from "@/types";
 import { useT } from "@/components/I18n";
 
-export function FavoritesList({ songs }: { songs: SongView[] }) {
+type FavoritesListProps = {
+  songs: SongView[];
+};
+
+export function FavoritesList({ songs }: FavoritesListProps) {
   const fav = useFavorites();
   const p = usePlayer();
   const tr = useT();

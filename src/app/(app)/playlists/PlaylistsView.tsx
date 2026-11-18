@@ -8,7 +8,11 @@ import { cleanName, createPlaylist } from "@/services/playlists";
 import type { PlaylistItem } from "@/types";
 import { useT } from "@/components/I18n";
 
-export function PlaylistsView({ lists }: { lists: PlaylistItem[] }) {
+type PlaylistsViewProps = {
+  lists: PlaylistItem[];
+};
+
+export function PlaylistsView({ lists }: PlaylistsViewProps) {
   const router = useRouter();
   const t = useT();
   const [name, setName] = useState("");

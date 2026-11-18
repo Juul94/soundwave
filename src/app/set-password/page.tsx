@@ -5,13 +5,14 @@ import { SetPasswordForm } from "./SetPasswordForm";
 import { AuthShell } from "@/components/AuthShell";
 import { createClient } from "@/lib/supabase/server";
 import { getT } from "@/i18n/server";
+import { firstParam } from "@/utils/searchParams";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).auth.setPassword };
 }
 
-export default async function SetPasswordPage({ searchParams }: { searchParams: Promise<{ new?: string }> }) {
-  const isNew = (await searchParams).new === "1";
+export default async function SetPasswordPage({ searchParams }: PageProps<"/set-password">) {
+  const isNew = firstParam((await searchParams).new) === "1";
   const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
   if (!data.user) redirect("/login?error=link");

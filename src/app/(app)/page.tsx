@@ -7,30 +7,29 @@ import { Empty, PageTitle } from "@/components/ui";
 import { requireUser } from "@/lib/auth";
 import { listGenres, PAGE_SIZE, searchSongs } from "@/services/library";
 import { getT } from "@/i18n/server";
+import { firstParam, parseSongSort } from "@/utils/searchParams";
 
 export const metadata: Metadata = { title: "Soundwave" };
 
-export default async function HomePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string; genre?: string; sort?: string; limit?: string }>;
-}) {
+export default async function HomePage({ searchParams }: PageProps<"/">) {
   const sp = await searchParams;
+  const q = firstParam(sp.q) ?? "";
+  const genre = firstParam(sp.genre) ?? "";
+  const sort = parseSongSort(sp.sort);
   const t = await getT();
   const { supabase } = await requireUser();
-  const sort = sp.sort === "az" || sp.sort === "plays" ? sp.sort : "new";
-  const limit = Math.min(Math.max(Number(sp.limit) || PAGE_SIZE, PAGE_SIZE), 400);
+  const limit = Math.min(Math.max(Number(firstParam(sp.limit)) || PAGE_SIZE, PAGE_SIZE), 400);
   const [genres, { songs, total }] = await Promise.all([
     listGenres(supabase),
-    searchSongs(supabase, { q: sp.q, genre: sp.genre, sort, limit }),
+    searchSongs(supabase, { q, genre, sort, limit }),
   ]);
-  const filtered = !!(sp.q || sp.genre);
-  const more = new URLSearchParams({ ...(sp.q && { q: sp.q }), ...(sp.genre && { genre: sp.genre }), sort, limit: String(limit + PAGE_SIZE) });
+  const filtered = !!(q || genre);
+  const more = new URLSearchParams({ ...(q && { q }), ...(genre && { genre }), sort, limit: String(limit + PAGE_SIZE) });
 
   return (
     <>
       <PageTitle title={t.browse.title} sub={t.songs(total)} action={<CastButton />} />
-      <BrowseControls genres={genres} songs={songs} q={sp.q ?? ""} genre={sp.genre ?? ""} sort={sort}>
+      <BrowseControls genres={genres} songs={songs} q={q} genre={genre} sort={sort}>
       {songs.length === 0 ? (
         <Empty
           title={filtered ? t.browse.noMatches : t.browse.noMusic}

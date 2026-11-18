@@ -14,7 +14,13 @@ const fmtDate = (iso: string) => {
   return `${p2(d.getDate())}.${p2(d.getMonth() + 1)}.${d.getFullYear()} ${p2(d.getHours())}:${p2(d.getMinutes())}`;
 };
 
-function UserRow({ r, onError, onMessage }: { r: Row; onError: (m: string | null) => void; onMessage: (m: string | null) => void }) {
+type UserRowProps = {
+  r: Row;
+  onError: (m: string | null) => void;
+  onMessage: (m: string | null) => void;
+};
+
+function UserRow({ r, onError, onMessage }: UserRowProps) {
   const [pending, start] = useTransition();
   const T = useT();
   const t = T.admin;
@@ -92,7 +98,12 @@ function UserRow({ r, onError, onMessage }: { r: Row; onError: (m: string | null
   );
 }
 
-export function UserManager({ rows, q }: { rows: Row[]; q: string }) {
+type UserManagerProps = {
+  rows: Row[];
+  q: string;
+};
+
+export function UserManager({ rows, q }: UserManagerProps) {
   const [state, action, pending] = useActionState(inviteUser, undefined);
   const [err, setErr] = useState<string | null>(null);
   const [msg, setMsg] = useState<string | null>(null);

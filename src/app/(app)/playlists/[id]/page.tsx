@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).playlists.playlist };
 }
 
-export default async function PlaylistPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function PlaylistPage({ params }: PageProps<"/playlists/[id]">) {
   const { id } = await params;
   const { supabase } = await requireUser();
   // RLS only returns the signed-in user's own playlists.

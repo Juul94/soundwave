@@ -5,13 +5,14 @@ import { requireAdmin } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { Profile } from "@/types";
 import { getT } from "@/i18n/server";
+import { firstParam } from "@/utils/searchParams";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getT()).admin.usersTitle };
 }
 
-export default async function UsersPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
-  const { q } = await searchParams;
+export default async function UsersPage({ searchParams }: PageProps<"/admin/users">) {
+  const q = firstParam((await searchParams).q);
   const { user } = await requireAdmin();
   const admin = createAdminClient();
 

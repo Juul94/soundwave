@@ -11,7 +11,13 @@ import { cleanName, deletePlaylist, removeFromPlaylist, renamePlaylist } from "@
 import type { SongView } from "@/types";
 import { useT } from "@/components/I18n";
 
-export function PlaylistView({ id, name, songs }: { id: string; name: string; songs: SongView[] }) {
+type PlaylistViewProps = {
+  id: string;
+  name: string;
+  songs: SongView[];
+};
+
+export function PlaylistView({ id, name, songs }: PlaylistViewProps) {
   const p = usePlayer();
   const router = useRouter();
   const t = useT();

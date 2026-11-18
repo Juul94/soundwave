@@ -62,7 +62,12 @@ function shuffled<T>(arr: T[]): T[] {
   return a;
 }
 
-export function PlayerProvider({ userId, children }: { userId: string; children: React.ReactNode }) {
+type PlayerProviderProps = {
+  userId: string;
+  children: React.ReactNode;
+};
+
+export function PlayerProvider({ userId, children }: PlayerProviderProps) {
   const supabase = useMemo(() => createClient(), []);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const urlCache = useRef(new Map<string, { url: string; exp: number }>());

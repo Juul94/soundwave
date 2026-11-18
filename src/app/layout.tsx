@@ -25,7 +25,7 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
   const lang = await getLang();
   return (
     <html lang={lang} className={`${geistSans.variable} h-full antialiased`}>

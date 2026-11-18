@@ -1,7 +1,13 @@
 import Link from "next/link";
 import { Music2 } from "lucide-react";
 
-export function PageTitle({ title, sub, action }: { title: string; sub?: string; action?: React.ReactNode }) {
+type PageTitleProps = {
+  title: string;
+  sub?: string;
+  action?: React.ReactNode;
+};
+
+export function PageTitle({ title, sub, action }: PageTitleProps) {
   return (
     <header className="mb-6 flex items-start justify-between gap-3">
       <div>
@@ -13,15 +19,13 @@ export function PageTitle({ title, sub, action }: { title: string; sub?: string;
   );
 }
 
-export function Empty({
-  title,
-  body,
-  action,
-}: {
+type EmptyProps = {
   title: string;
   body: string;
   action?: { href: string; label: string };
-}) {
+};
+
+export function Empty({ title, body, action }: EmptyProps) {
   return (
     <div className="sw-fade flex flex-col items-center rounded-2xl border border-dashed border-border px-6 py-14 text-center">
       <div className="flex size-14 items-center justify-center rounded-full bg-accent/15 text-accent">

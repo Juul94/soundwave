@@ -8,7 +8,12 @@ import { useT } from "@/components/I18n";
 
 type G = { id: string; name: string; count: number };
 
-function Row({ g, onError }: { g: G; onError: (m: string | null) => void }) {
+type RowProps = {
+  g: G;
+  onError: (m: string | null) => void;
+};
+
+function Row({ g, onError }: RowProps) {
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState(g.name);
   const [pending, start] = useTransition();
@@ -59,7 +64,11 @@ function Row({ g, onError }: { g: G; onError: (m: string | null) => void }) {
   );
 }
 
-export function GenreManager({ genres }: { genres: G[] }) {
+type GenreManagerProps = {
+  genres: G[];
+};
+
+export function GenreManager({ genres }: GenreManagerProps) {
   const [state, action, pending] = useActionState(createGenre, undefined);
   const [err, setErr] = useState<string | null>(null);
   const t = useT().admin;

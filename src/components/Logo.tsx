@@ -1,4 +1,9 @@
-export function LogoMark({ size = 32, animate = false }: { size?: number; animate?: boolean }) {
+type LogoMarkProps = {
+  size?: number;
+  animate?: boolean;
+};
+
+export function LogoMark({ size = 32, animate = false }: LogoMarkProps) {
   const bars = [0.4, 0.7, 1, 0.6, 0.85, 0.5];
   return (
     <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true">
@@ -26,7 +31,11 @@ export function LogoMark({ size = 32, animate = false }: { size?: number; animat
   );
 }
 
-export function Logo({ size = 32 }: { size?: number }) {
+type LogoProps = {
+  size?: number;
+};
+
+export function Logo({ size = 32 }: LogoProps) {
   return (
     <span className="inline-flex items-center gap-2.5 font-semibold tracking-tight">
       <LogoMark size={size} />
